@@ -15,6 +15,7 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
+  .get('/logout', (req, res) => setUserVerification(false))
   .post('/list', function(req, res) {
     const uname = req.body.uname;
     const pwrd = req.body.pwrd;
