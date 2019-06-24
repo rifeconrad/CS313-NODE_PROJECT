@@ -12,8 +12,7 @@ express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
   .post('/list', function(req, res) {
-   console.log(req.body);
-   res.write(req.body.uname);
+   console.log(req.body.uname);
    res.render('pages/list')
   })
   .get('/create', (req, res) => res.render('pages/create'))
