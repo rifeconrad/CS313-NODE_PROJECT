@@ -24,6 +24,7 @@ express()
     const pwrd = req.body.pwrd;
 
 	verifyUser(uname, pwrd, setUserVerification);
+	sleep(1);
     if (user_verified) {
     	console.log("rendering pages list");
     	res.render('pages/list');
@@ -42,7 +43,7 @@ function setUserVerification(verified) {
 
 function verifyUser(uname, pswrd, callback) {
 	var sql = "SELECT * FROM USERS WHERE username='" + uname + "' AND password='" + pswrd + "'";
-	await pool.query(sql, function(err, result) {
+	pool.query(sql, function(err, result) {
 		console.log("CHECKING DB");
 	    // If an error occurred...
 	    if (err) {
