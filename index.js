@@ -19,23 +19,6 @@ express()
   	setUserVerification(false);
   	res.render('pages/index');
   })
-  .get('/getPerson/:id', function(req, res) {
-  	res.write(req.params.id);
-
-  	var sql = "SELECT * FROM PERSON WHERE id=" + req.params.id;
-	pool.query(sql, function(err, result) {
-		console.log("CHECKING DB");
-	    // If an error occurred...
-	    if (err) {
-	        console.log("Error in query: ")
-	        console.log(err);
-	    }
-
-	    if (result.rows.length == 1) {
-	    	console.log(res.json(result.row[0]));
-	    } 
-	}); 
-  })
   .post('/list', function(req, res) {
     const uname = req.body.uname;
     const pwrd = req.body.pwrd;
