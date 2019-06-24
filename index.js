@@ -24,7 +24,6 @@ express()
     const pwrd = req.body.pwrd;
 
 	verifyUser(uname, pwrd, setUserVerification);
-	sleep(1);
     if (user_verified) {
     	console.log("rendering pages list");
     	res.render('pages/list');
