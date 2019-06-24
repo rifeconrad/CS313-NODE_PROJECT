@@ -20,7 +20,7 @@ express()
   	res.render('pages/index');
   })
   .get('/getPerson/:id', function(req, res) {
-  	res.write("<h1>" + req.query.id + "</h1>");
+  	res.write("<h1>" + req.params.id + "</h1>");
   })
   .post('/list', function(req, res) {
     const uname = req.body.uname;
