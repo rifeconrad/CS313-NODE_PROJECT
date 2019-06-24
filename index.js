@@ -20,7 +20,19 @@ express()
   	res.render('pages/index');
   })
   .get('/getPerson/:id', function(req, res) {
-  	res.write("<h1>" + req.params.id + "</h1>");
+  	var sql = "SELECT * FROM PERSON WHERE id=" + req.params.id;
+	pool.query(sql, function(err, result) {
+		console.log("CHECKING DB");
+	    // If an error occurred...
+	    if (err) {
+	        console.log("Error in query: ")
+	        console.log(err);
+	    }
+
+	    if (result.rows.length == 1) {
+	    	console.log(result);
+	    } 
+	}); 
   })
   .post('/list', function(req, res) {
     const uname = req.body.uname;
