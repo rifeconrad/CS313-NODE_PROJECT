@@ -20,6 +20,8 @@ express()
   	res.render('pages/index');
   })
   .get('/getPerson/:id', function(req, res) {
+  	res.write(req.params.id);
+
   	var sql = "SELECT * FROM PERSON WHERE id=" + req.params.id;
 	pool.query(sql, function(err, result) {
 		console.log("CHECKING DB");
@@ -31,6 +33,7 @@ express()
 
 	    if (result.rows.length == 1) {
 	    	console.log(result);
+	    	res.write(result);
 	    } 
 	}); 
   })
