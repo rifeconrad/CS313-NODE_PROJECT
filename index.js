@@ -32,7 +32,7 @@ express()
 	    }
 
 	    if (result.rows.length == 1) {
-	    	//console.log(res.json(result));
+	    	console.log(res.json(result.row[0]));
 	    } 
 	}); 
   })
