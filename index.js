@@ -32,6 +32,7 @@ express()
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 function setUserVerification(verified) {
+	console.log("USER VERIFIED");
 	user_verified = verified;
 } 
 
@@ -39,6 +40,7 @@ function verifyUser(uname, pswrd, callback) {
 	var sql = "SELECT * FROM USERS WHERE username=$1::string AND password=$2::string";
 	var params = [uname, pswrd];
 	pool.query(sql, params, function(err, result) {
+		console.log("CHECKING DB");
 	    // If an error occurred...
 	    if (err) {
 	        console.log("Error in query: ")
@@ -49,6 +51,8 @@ function verifyUser(uname, pswrd, callback) {
 	    	console.log("FOUND ROW");
 	    	callback(true);
 	    }
+
+	    console.log("NO ROW FOUND!");
 	    callback(false);
 	}); 
 }
