@@ -33,7 +33,7 @@ express()
 
 function setUserVerification(verified) {
 	user_verified = verified;
-}
+} 
 
 function verifyUser(uname, pswrd, callback) {
 	var sql = "SELECT * FROM USERS WHERE username=$1::string AND password=$2::string";
