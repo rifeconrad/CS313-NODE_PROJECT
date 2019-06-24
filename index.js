@@ -19,7 +19,7 @@ express()
     const uname = req.body.uname;
     const pwrd = req.body.pwrd;
 
-	verifyUser(uname, pwrd);
+	verifyUser(uname, pwrd, setUserVerification);
     if (user_verified) {
     	console.log("rendering pages list");
     	res.render('pages/list');
