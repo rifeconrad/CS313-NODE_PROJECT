@@ -32,7 +32,7 @@ express()
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 function setUserVerification(verified) {
-	console.log("USER VERIFIED");
+	console.log("USER VERIFICATION STATUS CHANGING");
 	user_verified = verified;
 } 
 
@@ -49,9 +49,9 @@ function verifyUser(uname, pswrd, callback) {
 	    if (result.rows.length == 1) {
 	    	console.log("FOUND ROW");
 	    	callback(true);
+	    } else {
+	    	console.log("NO ROW FOUND!");
+	    	callback(false);
 	    }
-
-	    console.log("NO ROW FOUND!");
-	    callback(false);
 	}); 
 }
