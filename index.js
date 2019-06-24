@@ -52,10 +52,10 @@ function verifyUser(uname, pswrd, callback) {
 
 	    if (result.rows.length == 1) {
 	    	console.log("FOUND ROW");
-	    	setTimeout(callback(true), 1000);
+	    	callback(true);
 	    } else {
 	    	console.log("NO ROW FOUND!");
-	    	setTimeout(callback(false), 1000);
+	    	callback(false);
 	    }
 	}); 
 }
