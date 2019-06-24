@@ -1,0 +1,24 @@
+drop table users;
+drop table listitem;
+
+CREATE TABLE Users (
+	id SERIAL NOT NULL,
+	username VARCHAR NOT NULL,
+	password VARCHAR NOT NULL,
+	UNIQUE (id)
+);
+
+CREATE TABLE ListItem (
+	id SERIAL NOT NULL,
+	title VARCHAR NOT NULL,
+	description VARCHAR NOT NULL,
+	user_id INT NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES Users(id),
+	UNIQUE (id)
+);
+
+INSERT INTO Users (username, password)
+VALUES ('username', 'password');
+
+INSERT INTO ListItem(title, description, user_id)
+VALUES ('something', 'do it eventually', (SELECT id FROM USERS WHERE username="username"));

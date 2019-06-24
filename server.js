@@ -19,10 +19,7 @@ pool.query(sql, function(err, result) {
     // Log this to the console for debugging purposes.
     console.log("Back from DB with result:");
     console.log(result.rows);
-
-
-});     
-
+});    
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
