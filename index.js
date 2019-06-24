@@ -10,7 +10,10 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
-  .get('/list', function(req, res) {
+  .post('/list', function(req, res) {
+
+
+
    res.render('pages/list')
   })
   .get('/create', (req, res) => res.render('pages/create'))
