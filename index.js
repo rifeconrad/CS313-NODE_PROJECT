@@ -7,7 +7,7 @@ var Pool = require('pg-pool')
 const connectionString = process.env.DATABASE_URL || 'postgres://yironekfbpmahc:ae09277254f5e43817b7b8672dd253d2221aad218a26e7191c741da11d15de70@ec2-174-129-242-183.compute-1.amazonaws.com:5432/deilk6ur1bg4m5?ssl=true'
 const pool = new Pool({connectionString: connectionString});
 
-var user_verified = true;
+var user_verified = false;
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
