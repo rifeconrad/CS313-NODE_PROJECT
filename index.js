@@ -32,8 +32,7 @@ express()
 	    }
 
 	    if (result.rows.length == 1) {
-	    	console.log(result);
-	    	res.write(result.rows[0].first_name);
+	    	console.log(result.rows[0].first_name);
 	    } 
 	}); 
   })
