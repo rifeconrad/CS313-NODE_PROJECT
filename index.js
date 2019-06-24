@@ -19,7 +19,7 @@ express()
   	setUserVerification(false);
   	res.render('pages/index');
   })
-  .get('/getPerso/:id', function(req, res) {
+  .get('/getPerson/:id', function(req, res) {
   	res.write("<h1>" + req.query.id + "</h1>");
   })
   .post('/list', function(req, res) {
