@@ -42,7 +42,7 @@ function setUserVerification(verified) {
 
 function verifyUser(uname, pswrd, callback) {
 	var sql = "SELECT * FROM USERS WHERE username='" + uname + "' AND password='" + pswrd + "'";
-	pool.query(sql, function(err, result) {
+	await pool.query(sql, function(err, result) {
 		console.log("CHECKING DB");
 	    // If an error occurred...
 	    if (err) {
