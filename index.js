@@ -14,6 +14,21 @@ express()
   .use(bodyParser.urlencoded({ extended: false }))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
+  .get('/getPerson/:id', function(req, res){
+  	pool.query(sql, function(err, result) {
+		var sql = "SELECT * FROM PERSON WHERE id=" + req.params.id;
+
+	    // If an error occurred...
+	    if (err) {
+	        console.log("Error in query: ")
+	        console.log(err);
+	    }
+
+	    if (result.rows.length == 1) {
+	    	console.log(res.json(result.row[0]));
+	    } 
+	}); 
+  })
   .get('/', (req, res) => res.render('pages/index'))
   .get('/logout', function(req, res){
   	setUserVerification(false);
