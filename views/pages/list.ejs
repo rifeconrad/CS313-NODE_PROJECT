@@ -5,6 +5,90 @@
 </head>
 <body>
 	<h1>Welcome to your To-Do List!</h1>
+	<form action="/list" >
+	    <input type="text" placeholder="Movie Search" id="search_text"></input>
+	    <button type="button" onclick="displaySearch()">Search</button>
+  	</form><br>
+
+  	<form action="/list" onchange="displaySelected()">
+		<select id="movie_select" style="display: none">
+		</select><br>
+	</form>
+
+	<ul id="todo_list">
+	</ul>
+
 	<form action="/logout" method="GET"><button type="submit">Logout</button></form>
+
+	<script type="text/javascript">
+	    function removeOptions(selectbox)
+		{
+		    var i;
+		    for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
+		    {
+		        selectbox.remove(i);
+		    }
+		}
+
+		function displaySelected() {
+			let todo_list = document.getElementById("todo_list");
+
+			let movie_select_menu = document.getElementById("movie_select");
+			let movie_title = movie_select_menu.value;
+			console.log("MOVIE: " + movie_title);
+
+			if (movie_title != "null") {
+				let li = document.createElement("li");
+				let text = document.createTextNode(movie_title);
+				li.appendChild(text);
+				// TODO
+				// add rm_button functionality for onclick events to remove specified list items
+				let rm_button = document.createElement("button");
+				li.appendChild(rm_button);
+				todo_list.appendChild(li);
+			}
+		}
+
+	    function displaySearch() {
+	      let search_text = document.getElementById("search_text").value;
+
+	      var xhttp = new XMLHttpRequest();
+	      xhttp.onreadystatechange = function() {
+	        if (this.readyState == 4 && this.status == 200) {
+	          let json = JSON.parse(this.responseText);
+	          console.log(json);
+
+	          let movie_select_menu = document.getElementById("movie_select");
+
+	          removeOptions(movie_select_menu);
+
+	          let null_option = document.createElement("option");
+	          null_option.text = "Select Movie";
+	          null_option.setAttribute("value", "null");
+	          movie_select_menu.add(null_option);
+
+              if (json.Search != null) {
+	            json.Search.forEach(elem => {
+	            let option = document.createElement("option");
+	            option.text = elem.Title;
+	            option.setAttribute("value", elem.Title);
+	            movie_select_menu.add(option);
+	          })   
+
+	          if (movie_select_menu.options.length > 0) {
+		       	console.log("works!");
+		       	movie_select_menu.style.display = "block";
+		      } else {
+		       	movie_select_menu.style.display = "none";
+		      }    
+	  		} else {
+	  			document.getElementById("movie_select").style.display = "none";
+	  		}
+	       }
+	      };
+	      xhttp.open("GET", "http://www.omdbapi.com/?i=tt3896198&apikey=3a621415&s=" + search_text, true);
+	      xhttp.send();
+	    }
+    </script>
 </body>
 </html>
