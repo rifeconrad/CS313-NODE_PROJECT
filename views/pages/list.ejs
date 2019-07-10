@@ -4,7 +4,7 @@
 	<title>To-Do List</title>
 </head>
 <body>
-	<h1>Welcome to your To-Do List!</h1>
+	<h1>Your To-Watch List</h1>
 	<form action="/list" >
 	    <input type="text" placeholder="Movie Search" id="search_text"></input>
 	    <button type="button" onclick="displaySearch()">Search</button>
@@ -21,6 +21,12 @@
 	<form action="/logout" method="GET"><button type="submit">Logout</button></form>
 
 	<script type="text/javascript">
+		function removeItem(movie_title) {
+			console.log("REMOVING");
+			let item = document.getElementById(movie_title);
+			document.getElementById("todo_list").removeChild(item);
+		}
+
 	    function removeOptions(selectbox)
 		{
 		    var i;
@@ -35,15 +41,17 @@
 
 			let movie_select_menu = document.getElementById("movie_select");
 			let movie_title = movie_select_menu.value;
-			console.log("MOVIE: " + movie_title);
 
 			if (movie_title != "null") {
 				let li = document.createElement("li");
+				li.setAttribute("id", movie_title);
 				let text = document.createTextNode(movie_title);
 				li.appendChild(text);
 				// TODO
 				// add rm_button functionality for onclick events to remove specified list items
 				let rm_button = document.createElement("button");
+				rm_button.innerHTML = "Remove";
+				rm_button.setAttribute("onClick", 'removeItem("' + movie_title + '")');
 				li.appendChild(rm_button);
 				todo_list.appendChild(li);
 			}

@@ -14,21 +14,6 @@ express()
   .use(bodyParser.urlencoded({ extended: false }))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
-  .get('/getPerson/:id', function(req, res){
-  	pool.query(sql, function(err, result) {
-		var sql = "SELECT * FROM PERSON WHERE id=" + req.params.id;
-
-	    // If an error occurred...
-	    if (err) {
-	        console.log("Error in query: ")
-	        console.log(err);
-	    }
-
-	    if (result.rows.length == 1) {
-	    	console.log(res.json(result.row[0]));
-	    } 
-	}); 
-  })
   .get('/', (req, res) => res.render('pages/index'))
   .get('/logout', function(req, res){
   	setUserVerification(false);
@@ -41,15 +26,36 @@ express()
     if (!user_verified)
 		verifyUser(uname, pwrd, setUserVerification);
     if (user_verified) {
-    	console.log("rendering pages list");
     	res.render('pages/list');
     } else {
-    	console.log("rendering pages login");
     	res.render('pages/index');
     }
   })
   .get('/create', (req, res) => res.render('pages/create'))
+  .post('/create', function(req, res) {
+    const uname = req.body.uname;
+    const pwrd = req.body.pwrd;
+    const conf_pwrd = req.body.conf_pwrd;
+    
+    if (pwrd != conf_pwrd)
+      return;
+
+    createAccount(uname, pwrd);
+
+    res.render('pages/index');
+  })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+function createAccount(uname, pwrd) {
+  var sql = "INSERT INTO Users (username, password) VALUES ('" + uname + "', '" + pwrd + "')";
+  pool.query(sql, function(err, result) {
+      // If an error occurred...
+      if (err) {
+          console.log("Error in query: ")
+          console.log(err);
+      }
+  }); 
+}
 
 function setUserVerification(verified) {
 	console.log("USER VERIFICATION STATUS CHANGING");

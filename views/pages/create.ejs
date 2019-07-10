@@ -4,6 +4,11 @@
 	<title>Create Account</title>
 </head>
 <body>
-	<h1>Ready to create an account??</h1>
+	<form action="/create" method="POST">
+		New Username <input name="uname" type="text" placeholder="username" required></input><br>
+		New Password <input name="pwrd" type="text" placeholder="new password" required></input><br>
+		Confirm Password <input name="conf_pwrd" type="text" placeholder="confirm password" required></input><br>
+		<button type="submit">Create Account</button>
+	</form>
 </body>
 </html>
