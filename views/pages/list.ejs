@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>To-Do List</title>
+	<title>To-Watch List</title>
+	<link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 <body>
 	<h1>Your To-Watch List</h1>
-	<form action="/list" >
-	    <input type="text" placeholder="Movie Search" id="search_text"></input>
-	    <button type="button" onclick="displaySearch()">Search</button>
-  	</form><br>
 
-  	<form action="/list" onchange="displaySelected()">
-		<select id="movie_select" style="display: none">
-		</select><br>
-	</form>
+	<div id="main_scene">
+		<form action="/list" >
+		    <input type="text" placeholder="Movie Search" id="search_text"></input>
+		    <button type="button" onclick="displaySearch()">Search</button>
+	  	</form><br>
 
-	<ul id="todo_list">
-	</ul>
+	  	<form action="/list" onchange="displaySelected()">
+			<select id="movie_select" style="display: none">
+			</select><br>
+		</form>
 
-	<form action="/logout" method="GET"><button type="submit">Logout</button></form>
+		<ul id="todo_list">
+		</ul>
+
+		<form action="/list" method="GET"><button type="submit">Save</button></form><br>
+		<form action="/logout" method="GET"><button type="submit">Logout</button></form>
+	</div>
 
 	<script type="text/javascript">
 		function removeItem(movie_title) {
-			console.log("REMOVING");
 			let item = document.getElementById(movie_title);
 			document.getElementById("todo_list").removeChild(item);
 		}
@@ -42,15 +46,20 @@
 			let movie_select_menu = document.getElementById("movie_select");
 			let movie_title = movie_select_menu.value;
 
+			if (movie_title.length > 40) {
+				movie_title = movie_title.substr(0, 1);
+				movie_title += "...";
+			}
+
 			if (movie_title != "null") {
 				let li = document.createElement("li");
 				li.setAttribute("id", movie_title);
-				let text = document.createTextNode(movie_title);
+				let text = document.createTextNode(movie_title.toUpperCase());
 				li.appendChild(text);
 				// TODO
 				// add rm_button functionality for onclick events to remove specified list items
 				let rm_button = document.createElement("button");
-				rm_button.innerHTML = "Remove";
+				rm_button.innerHTML = "Watched";
 				rm_button.setAttribute("onClick", 'removeItem("' + movie_title + '")');
 				li.appendChild(rm_button);
 				todo_list.appendChild(li);

@@ -2,13 +2,21 @@
 <html>
 <head>
 	<title>Create Account</title>
+	<link rel="stylesheet" href="/stylesheets/login.css">
 </head>
 <body>
-	<form action="/create" method="POST">
-		New Username <input name="uname" type="text" placeholder="username" required></input><br>
-		New Password <input name="pwrd" type="text" placeholder="new password" required></input><br>
-		Confirm Password <input name="conf_pwrd" type="text" placeholder="confirm password" required></input><br>
-		<button type="submit">Create Account</button>
-	</form>
+
+	<h1>CREATE ACCOUNT</h1>
+
+	<div id="login_form">
+		<div id= "input_box">
+			<form action="/create" method="POST">
+				New Username <input name="uname" type="text" placeholder="username" required></input><br>
+				New Password <input name="pwrd" type="text" placeholder="new password" required></input><br>
+				Confirm Password <input name="conf_pwrd" type="text" placeholder="confirm password" required></input><br>
+				<button type="submit">Create Account</button>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
